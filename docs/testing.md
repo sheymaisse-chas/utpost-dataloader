@@ -11,7 +11,7 @@ Vi ärvde en klient utan ett enda test och ett API vars kontrakt bara fanns i hu
 ## Nivåer
 - **Enhet (Vitest):** funktioner utan Vue i sig – `lib/tours.ts` (höjdmeter, formatering), senare validering och datum. Millisekunder, inga mockar.
 - **Komponent (Vitest + Vue Testing Library):** vyerna. Rendera, fråga som en användare (`getByRole`, `getByLabelText`), interagera med `user-event`. API-modulen mockad.
-- **API (från M5):** integrationstester mot GraphQL-servern med riktig databas, i pipelinen. Inte nu.
+- **API (M5):** integrationstester mot GraphQL-servern med riktig databas – lokalt mot compose-databaserna, i pipelinen mot services. Ingen port, ingen mock: `yoga.fetch()` får samma request som browsern skickar.
 - **E2E:** inte förrän M6. Då ett smoke-test mot staging.
 
 ## Karta: vad testas var
@@ -26,6 +26,7 @@ Vi ärvde en klient utan ett enda test och ett API vars kontrakt bara fanns i hu
 | `api.ts` | ingen egen | tre rader; testas indirekt genom komponenttesterna | – |
 | Inloggning (Pinia-store) | enhet på storen | logik utan UI; komponenttest på LoginView när den portas | nej |
 | Routern | ingen | Vue Routers beteende är inte vårt att testa | – |
+| GraphQL-API:et (`api/src/graphql/`) | integration | resolvers mot riktig databas: N+1-regression, inloggningskrav, fel med 200, migreringen av loggar | ja, 6 st (M5) |
 
 ## Regler
 - En PR mergas bara när pipelinen är grön **och** ny logik har ett test som visar vad den ska göra.
