@@ -21,7 +21,8 @@
     "build": "npm run build --workspace=client",
     "mongo:smoke": "npm run mongo:smoke --workspace=api",
     "migrate:logs": "npm run migrate:logs --workspace=api",
-    "codegen": "npm run codegen --workspace=client"
+    "codegen": "npm run codegen --workspace=client",
+    "test:api": "npm run test --workspace=api"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"
